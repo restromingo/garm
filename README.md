@@ -141,8 +141,42 @@ Yes, never click "Start Audio". But this energy isn't encouraged.
 ### Requirements
 
 - macOS (tested on macOS with M4 MacBook Pro)
-- Xcode installed (tested on Xcode 26)
+- Xcode installed (tested on Xcode 26) or Xcode Command Line Tools
 - MacBook with lid angle sensor (2019 16-inch MacBook Pro or newer, **does not work on M1 devices**)
+
+### Troubleshooting
+
+**Installation script fails:**
+
+1. **Xcode not found:**
+   ```bash
+   # Install Xcode from App Store, or install Command Line Tools:
+   xcode-select --install
+   ```
+
+2. **Xcode license not accepted:**
+   ```bash
+   sudo xcodebuild -license accept
+   ```
+
+3. **Build fails:**
+   - Open the project in Xcode: `open LidAngleSensor.xcodeproj`
+   - Build manually: `Product > Build` (Cmd+B)
+   - Check for specific error messages
+
+4. **Permission denied when copying to /Applications:**
+   - The script will try with `sudo` automatically
+   - Or copy manually: Find the `.app` file and drag it to `/Applications` in Finder
+
+5. **App not found after build:**
+   - Check: `find ~/Library/Developer/Xcode/DerivedData -name "LidAngleSensor.app"`
+   - Build output shows the exact path
+
+**The app doesn't work:**
+
+- Make sure your MacBook has a lid angle sensor (2019 16-inch MacBook Pro or newer)
+- **M1 MacBooks are not supported** - this is a known limitation
+- Try running the original [LidAngleSensor](https://github.com/samhenrigold/LidAngleSensor) first to verify your hardware works
 
 ## Building
 
