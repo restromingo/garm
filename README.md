@@ -83,7 +83,23 @@ Yes, never click "Start Audio". But this energy isn't encouraged.
 
 ## Installation
 
-### Quick Install (Recommended)
+### Download Pre-built App (Easiest - No Xcode Required) ⭐
+
+1. **Download the latest release:**
+   - Go to [Releases](https://github.com/restromingo/garm/releases) (or download `releases/LidAngleSensor-accordion.zip` from the repository)
+   - Download `LidAngleSensor-accordion.zip`
+
+2. **Extract and install:**
+   - Double-click the `.zip` file to extract
+   - Drag `LidAngleSensor.app` to your `/Applications` folder
+
+3. **Launch the app** from `/Applications/LidAngleSensor.app`
+
+**Note:** On first launch, macOS may warn about an unidentified developer. To fix:
+- Right-click the app → Open → Click "Open" in the dialog
+- Or: System Settings → Privacy & Security → Allow the app
+
+### Build from Source (Requires Xcode)
 
 1. **Clone this repository:**
    ```bash
