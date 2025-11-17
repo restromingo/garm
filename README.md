@@ -85,19 +85,80 @@ Yes, never click "Start Audio". But this energy isn't encouraged.
 
 ### Download Pre-built App (Easiest - No Xcode Required) ⭐
 
-1. **Download the latest release:**
-   - Go to [Releases](https://github.com/restromingo/garm/releases) (or download `releases/LidAngleSensor-accordion.zip` from the repository)
-   - Download `LidAngleSensor-accordion.zip`
+**Method 1: Using Install Script (Easiest)**
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/restromingo/garm.git
+   cd garm
+   ```
+
+2. **Run the install script:**
+   ```bash
+   chmod +x install-app.sh
+   ./install-app.sh
+   ```
+
+   The script will automatically:
+   - Extract the app
+   - Remove quarantine attributes (fixes "damaged" error)
+   - Install to `/Applications`
+
+**Method 2: Manual Installation**
+
+1. **Download the app:**
+   - Download `releases/LidAngleSensor-accordion.zip` from this repository
+   - Or clone the repo: `git clone https://github.com/restromingo/garm.git`
 
 2. **Extract and install:**
-   - Double-click the `.zip` file to extract
-   - Drag `LidAngleSensor.app` to your `/Applications` folder
+   ```bash
+   cd garm/releases
+   unzip LidAngleSensor-accordion.zip
+   # Remove quarantine (fixes "damaged" error)
+   xattr -cr LidAngleSensor.app
+   # Move to Applications
+   mv LidAngleSensor.app /Applications/
+   ```
 
-3. **Launch the app** from `/Applications/LidAngleSensor.app`
+3. **Launch the app:**
+   - Open `/Applications/LidAngleSensor.app`
+   - If macOS says the app is "damaged", see troubleshooting below
 
-**Note:** On first launch, macOS may warn about an unidentified developer. To fix:
-- Right-click the app → Open → Click "Open" in the dialog
-- Or: System Settings → Privacy & Security → Allow the app
+**Method 3: Using Finder (GUI)**
+
+1. **Download and extract:**
+   - Download `releases/LidAngleSensor-accordion.zip`
+   - Double-click to extract
+
+2. **Remove quarantine (fixes "damaged" error):**
+   - Open Terminal
+   - Run: `xattr -cr ~/Downloads/LidAngleSensor.app` (adjust path if needed)
+
+3. **Install:**
+   - Drag `LidAngleSensor.app` to `/Applications` folder
+
+4. **Launch:**
+   - If macOS blocks it: Right-click → Open → Click "Open"
+   - Or: System Settings → Privacy & Security → Click "Open Anyway"
+
+**Troubleshooting "App is damaged" error:**
+
+If macOS says the app is damaged or can't be opened:
+
+1. **Remove quarantine attributes:**
+   ```bash
+   xattr -cr /Applications/LidAngleSensor.app
+   ```
+
+2. **Or allow unsigned apps:**
+   ```bash
+   sudo spctl --master-disable
+   # Re-enable after: sudo spctl --master-enable
+   ```
+
+3. **Or use right-click method:**
+   - Right-click the app → Open → Click "Open" in the dialog
+   - This bypasses Gatekeeper for this specific app
 
 ### Build from Source (Requires Xcode)
 

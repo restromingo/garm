@@ -37,6 +37,10 @@ echo "📦 Copying app to releases folder..."
 rm -rf releases/LidAngleSensor.app
 cp -R "$APP_PATH" releases/
 
+# Remove quarantine attributes (fixes "damaged" error on macOS)
+echo "🔓 Removing quarantine attributes..."
+xattr -cr releases/LidAngleSensor.app
+
 # Create zip archive
 echo "📦 Creating zip archive..."
 cd releases
