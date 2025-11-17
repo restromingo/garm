@@ -1,3 +1,35 @@
+# Build artifacts
 /build
+DerivedData/
+*.xcuserdata
+*.xcworkspace/xcuserdata/
+
+# macOS
 .DS_Store
-releases/*.app
+.AppleDouble
+.LSOverride
+
+# Xcode
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.xccheckout
+*.moved-aside
+*.xcuserstate
+*.xcscmblueprint
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Releases (keep zip, ignore unpacked apps)
+releases/*.app/
+releases/*.dmg
+
+# Temporary files
+*~
+*.swp
+*.swo
+*.orig
+*.tmp
