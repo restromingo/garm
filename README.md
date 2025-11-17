@@ -1,8 +1,31 @@
 # Lid Angle Sensor
 
-Hi, I’m Sam Gold. Did you know that you have ~rights~ a lid angle sensor in your MacBook? [The ~Constitution~ human interface device utility says you do.](https://youtu.be/wqnHtGgVAUE?t=21)
+> **Fork of [samhenrigold/LidAngleSensor](https://github.com/samhenrigold/LidAngleSensor)** with added **Accordion Mode** 🪗
+> 
+> This fork adds a bisonoric accordion mode where you can play notes using keyboard keys while controlling the bellows by opening/closing the MacBook lid.
+
+---
+
+Hi, I'm Sam Gold. Did you know that you have ~rights~ a lid angle sensor in your MacBook? [The ~Constitution~ human interface device utility says you do.](https://youtu.be/wqnHtGgVAUE?t=21)
 
 This is a little utility that shows the angle from the sensor and, optionally, plays a wooden door creaking sound if you adjust it reeaaaaaal slowly.
+
+## 🪗 Accordion Mode (New!)
+
+This fork adds an **Accordion Mode** feature:
+
+- **12 accordion buttons** mapped to keyboard keys
+- **Bisonoric behavior**: Each button plays different notes when bellows are opening (pull) vs closing (push)
+- **Bellows control**: Sound only plays when the lid is moving (velocity > 1 deg/s)
+- **Volume control**: Faster movement = louder sound
+- **Two sound modes**: Synthesized sine waves or sample-based playback (гармошка.wav)
+- **Polyphonic**: Play multiple notes simultaneously
+
+**How to use:**
+1. Select "Accordion" mode in the app
+2. Press keyboard keys (1-9, 0, -, =) to play notes
+3. Open/close the MacBook lid to control the bellows
+4. Toggle between synthesized and sample-based sound using the checkbox
 
 ## FAQ
 
