@@ -80,17 +80,72 @@ LEGO Batman 3: Beyond Gotham. But you knew that already.
 
 Yes, never click "Start Audio". But this energy isn't encouraged.
 
+## Installation
+
+### Quick Install (Recommended)
+
+1. **Clone this repository:**
+   ```bash
+   git clone https://github.com/restromingo/garm.git
+   cd garm
+   ```
+
+2. **Run the install script:**
+   ```bash
+   chmod +x install.sh
+   ./install.sh
+   ```
+   
+   If you need administrator privileges:
+   ```bash
+   sudo ./install.sh
+   ```
+
+3. **Launch the app** from `/Applications/LidAngleSensor.app`
+
+### Manual Installation
+
+1. **Clone this repository:**
+   ```bash
+   git clone https://github.com/restromingo/garm.git
+   cd garm
+   ```
+
+2. **Build the project:**
+   ```bash
+   xcodebuild -project LidAngleSensor.xcodeproj \
+              -scheme LidAngleSensor \
+              -configuration Release \
+              build \
+              CODE_SIGN_IDENTITY="" \
+              CODE_SIGNING_REQUIRED=NO
+   ```
+
+3. **Find the built app:**
+   ```bash
+   find ~/Library/Developer/Xcode/DerivedData -name "LidAngleSensor.app" -type d | grep Release
+   ```
+
+4. **Copy to Applications:**
+   - Open Finder and navigate to the path from step 3
+   - Drag `LidAngleSensor.app` to `/Applications`
+
+### Building with Xcode
+
+1. Open `LidAngleSensor.xcodeproj` in Xcode
+2. Select the `LidAngleSensor` scheme and `Release` configuration
+3. Press `Cmd+B` to build
+4. Find the `.app` file in the Products folder and copy it to `/Applications`
+
+### Requirements
+
+- macOS (tested on macOS with M4 MacBook Pro)
+- Xcode installed (tested on Xcode 26)
+- MacBook with lid angle sensor (2019 16-inch MacBook Pro or newer, **does not work on M1 devices**)
+
 ## Building
 
 According to [this issue](https://github.com/samhenrigold/LidAngleSensor/issues/12), building requires having Xcode installed. I've only tested this on Xcode 26. YMMV.
-
-## Installation
-
-Via Homebrew:
-
-```shell
-brew install lidanglesensor
-```
 
 ## Related projects
 
