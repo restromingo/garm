@@ -101,7 +101,7 @@ Yes, never click "Start Audio". But this energy isn't encouraged.
 
    The script will automatically:
    - Extract the app
-   - Remove quarantine attributes (fixes "damaged" error)
+   - Sign the app (no quarantine needed)
    - Install to `/Applications`
 
 **Method 2: Manual Installation**
@@ -114,15 +114,15 @@ Yes, never click "Start Audio". But this energy isn't encouraged.
    ```bash
    cd garm/releases
    unzip LidAngleSensor-accordion.zip
-   # Remove quarantine (fixes "damaged" error)
-   xattr -cr LidAngleSensor.app
+   # Sign app (optional, but recommended)
+   codesign --force --deep --sign - LidAngleSensor.app
    # Move to Applications
    mv LidAngleSensor.app /Applications/
    ```
 
 3. **Launch the app:**
    - Open `/Applications/LidAngleSensor.app`
-   - If macOS says the app is "damaged", see troubleshooting below
+   - The app is pre-signed, so it should work without issues
 
 **Method 3: Using Finder (GUI)**
 
@@ -130,35 +130,29 @@ Yes, never click "Start Audio". But this energy isn't encouraged.
    - Download `releases/LidAngleSensor-accordion.zip`
    - Double-click to extract
 
-2. **Remove quarantine (fixes "damaged" error):**
-   - Open Terminal
-   - Run: `xattr -cr ~/Downloads/LidAngleSensor.app` (adjust path if needed)
-
-3. **Install:**
+2. **Install:**
    - Drag `LidAngleSensor.app` to `/Applications` folder
 
-4. **Launch:**
+3. **Launch:**
+   - The app is pre-signed and should work without issues
    - If macOS blocks it: Right-click → Open → Click "Open"
    - Or: System Settings → Privacy & Security → Click "Open Anyway"
 
 **Troubleshooting "App is damaged" error:**
 
-If macOS says the app is damaged or can't be opened:
+The app is pre-signed with an ad-hoc signature, so it should work without issues. If macOS still blocks it:
 
-1. **Remove quarantine attributes:**
+1. **Right-click method (easiest):**
+   - Right-click the app → Open → Click "Open" in the dialog
+   - This bypasses Gatekeeper for this specific app
+
+2. **Or allow in System Settings:**
+   - System Settings → Privacy & Security → Click "Open Anyway" next to the app
+
+3. **Or remove quarantine (if needed):**
    ```bash
    xattr -cr /Applications/LidAngleSensor.app
    ```
-
-2. **Or allow unsigned apps:**
-   ```bash
-   sudo spctl --master-disable
-   # Re-enable after: sudo spctl --master-enable
-   ```
-
-3. **Or use right-click method:**
-   - Right-click the app → Open → Click "Open" in the dialog
-   - This bypasses Gatekeeper for this specific app
 
 ### Build from Source (Requires Xcode)
 

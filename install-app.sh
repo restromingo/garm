@@ -35,9 +35,12 @@ if [ ! -d "LidAngleSensor.app" ]; then
     exit 1
 fi
 
-# Remove quarantine attributes (fixes "damaged" error)
-echo -e "${YELLOW}🔓 Removing quarantine attributes...${NC}"
-xattr -cr LidAngleSensor.app
+# Sign app with ad-hoc signature (no quarantine needed)
+echo -e "${YELLOW}✍️  Signing app...${NC}"
+codesign --force --deep --sign - LidAngleSensor.app 2>/dev/null || {
+    echo -e "${YELLOW}⚠️  Could not sign app, removing quarantine instead...${NC}"
+    xattr -cr LidAngleSensor.app
+}
 
 # Remove old version if exists
 if [ -d "/Applications/LidAngleSensor.app" ]; then

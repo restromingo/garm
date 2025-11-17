@@ -37,9 +37,9 @@ echo "📦 Copying app to releases folder..."
 rm -rf releases/LidAngleSensor.app
 cp -R "$APP_PATH" releases/
 
-# Remove quarantine attributes (fixes "damaged" error on macOS)
-echo "🔓 Removing quarantine attributes..."
-xattr -cr releases/LidAngleSensor.app
+# Sign app with ad-hoc signature (no quarantine needed)
+echo "✍️  Signing app with ad-hoc signature..."
+codesign --force --deep --sign - releases/LidAngleSensor.app
 
 # Create zip archive
 echo "📦 Creating zip archive..."
