@@ -4,6 +4,7 @@
 > 
 > This fork adds a bisonoric accordion mode where you can play notes using keyboard keys while controlling the bellows by opening/closing the MacBook lid.
 
+> by restromingo
 ---
 
 Hi, I'm Sam Gold. Did you know that you have ~rights~ a lid angle sensor in your MacBook? [The ~Constitution~ human interface device utility says you do.](https://youtu.be/wqnHtGgVAUE?t=21)
