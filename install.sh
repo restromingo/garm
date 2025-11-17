@@ -3,7 +3,8 @@
 # Installation script for LidAngleSensor with Accordion Mode
 # Usage: ./install.sh
 
-set -e  # Exit on error
+# Don't use set -e here - we handle errors manually
+set -u  # Exit on undefined variables
 
 # Colors for output
 RED='\033[0;31m'
@@ -19,10 +20,11 @@ if ! command -v xcodebuild &> /dev/null; then
     exit 1
 fi
 
-# Check Xcode license agreement
+# Check Xcode license agreement (don't fail if check fails)
 if ! xcodebuild -checkFirstLaunchStatus 2>/dev/null; then
     echo -e "${YELLOW}⚠️  Xcode license agreement may need to be accepted.${NC}"
     echo "   Run: sudo xcodebuild -license accept"
+    echo "   (Continuing anyway...)"
 fi
 
 # Check if we're in the right directory
@@ -85,18 +87,27 @@ if [ $BUILD_STATUS -eq 0 ]; then
         rm -rf "/Applications/LidAngleSensor.app"
     fi
     
-    # Copy new app
-    if cp -R "$APP_PATH" /Applications/ 2>/dev/null; then
+    # Copy new app - try without sudo first
+    if cp -R "$APP_PATH" /Applications/ 2>/dev/null && [ -d "/Applications/LidAngleSensor.app" ]; then
         echo -e "${GREEN}✅ Application successfully installed to /Applications/LidAngleSensor.app${NC}"
         echo -e "${GREEN}🎹 Launch the app from the Applications folder!${NC}"
     else
-        echo -e "${RED}❌ Error copying to /Applications. Trying with sudo...${NC}"
-        if sudo cp -R "$APP_PATH" /Applications/; then
+        echo -e "${YELLOW}⚠️  Need administrator privileges to copy to /Applications${NC}"
+        echo -e "${YELLOW}   Trying with sudo (you may be prompted for your password)...${NC}"
+        
+        # Try with sudo
+        if sudo cp -R "$APP_PATH" /Applications/ 2>&1 && [ -d "/Applications/LidAngleSensor.app" ]; then
             echo -e "${GREEN}✅ Application successfully installed with sudo${NC}"
             echo -e "${GREEN}🎹 Launch the app from the Applications folder!${NC}"
         else
-            echo -e "${RED}❌ Installation failed. Please copy manually:${NC}"
-            echo "   cp -R \"$APP_PATH\" /Applications/"
+            echo -e "${RED}❌ Installation failed.${NC}"
+            echo ""
+            echo "   Please copy manually:"
+            echo "   1. Open Finder"
+            echo "   2. Press Cmd+Shift+G and paste this path:"
+            echo "      $APP_PATH"
+            echo "   3. Drag LidAngleSensor.app to /Applications"
+            echo ""
             exit 1
         fi
     fi
