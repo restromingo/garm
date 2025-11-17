@@ -83,76 +83,31 @@ Yes, never click "Start Audio". But this energy isn't encouraged.
 
 ## Installation
 
-### Download Pre-built App (Easiest - No Xcode Required) ⭐
+### Method 1: Download Pre-built App (Easiest) ⭐
 
-**Method 1: Using Install Script (Easiest)**
+1. **Download the app:**
+   - Go to [releases folder](https://github.com/restromingo/garm/tree/main/releases)
+   - Download `LidAngleSensor-accordion.zip`
 
-1. **Clone the repository:**
+2. **Extract and install:**
+   - Double-click the `.zip` file to extract
+   - Drag `LidAngleSensor.app` to your `/Applications` folder
+
+3. **Launch:**
+   - Open `/Applications/LidAngleSensor.app`
+   - If macOS blocks it: Right-click → Open → Click "Open"
+
+### Method 2: Install via Terminal
+
+1. **Clone and install:**
    ```bash
    git clone https://github.com/restromingo/garm.git
    cd garm
-   ```
-
-2. **Run the install script:**
-   ```bash
    chmod +x install-app.sh
    ./install-app.sh
    ```
 
-   The script will automatically:
-   - Extract the app
-   - Sign the app (no quarantine needed)
-   - Install to `/Applications`
-
-**Method 2: Manual Installation**
-
-1. **Download the app:**
-   - Download `releases/LidAngleSensor-accordion.zip` from this repository
-   - Or clone the repo: `git clone https://github.com/restromingo/garm.git`
-
-2. **Extract and install:**
-   ```bash
-   cd garm/releases
-   unzip LidAngleSensor-accordion.zip
-   # Sign app (optional, but recommended)
-   codesign --force --deep --sign - LidAngleSensor.app
-   # Move to Applications
-   mv LidAngleSensor.app /Applications/
-   ```
-
-3. **Launch the app:**
-   - Open `/Applications/LidAngleSensor.app`
-   - The app is pre-signed, so it should work without issues
-
-**Method 3: Using Finder (GUI)**
-
-1. **Download and extract:**
-   - Download `releases/LidAngleSensor-accordion.zip`
-   - Double-click to extract
-
-2. **Install:**
-   - Drag `LidAngleSensor.app` to `/Applications` folder
-
-3. **Launch:**
-   - The app is pre-signed and should work without issues
-   - If macOS blocks it: Right-click → Open → Click "Open"
-   - Or: System Settings → Privacy & Security → Click "Open Anyway"
-
-**Troubleshooting "App is damaged" error:**
-
-The app is pre-signed with an ad-hoc signature, so it should work without issues. If macOS still blocks it:
-
-1. **Right-click method (easiest):**
-   - Right-click the app → Open → Click "Open" in the dialog
-   - This bypasses Gatekeeper for this specific app
-
-2. **Or allow in System Settings:**
-   - System Settings → Privacy & Security → Click "Open Anyway" next to the app
-
-3. **Or remove quarantine (if needed):**
-   ```bash
-   xattr -cr /Applications/LidAngleSensor.app
-   ```
+   The script automatically extracts, signs, and installs the app.
 
 ### Build from Source (Requires Xcode)
 
