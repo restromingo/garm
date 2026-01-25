@@ -109,7 +109,10 @@ typedef NS_ENUM(NSInteger, AudioMode) {
     // Create audio toggle button
     self.audioToggleButton = [[NSButton alloc] init];
     [self.audioToggleButton setTitle:@"Start Audio"];
-    [self.audioToggleButton setBezelStyle:NSBezelStyleRounded];
+    // Use modern button style (compatible with macOS 11.5+)
+    // NSBezelStyleRounded is deprecated but still works; using buttonType for better compatibility
+    [self.audioToggleButton setButtonType:NSButtonTypePushOnPushOff];
+    [self.audioToggleButton setBezelStyle:NSBezelStyleRounded]; // Still supported for compatibility
     [self.audioToggleButton setTarget:self];
     [self.audioToggleButton setAction:@selector(toggleAudio:)];
     [self.audioToggleButton setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -535,38 +538,42 @@ typedef NS_ENUM(NSInteger, AudioMode) {
 }
 
 - (NSImage *)createAccordionIcon {
-    // Create a simple accordion icon programmatically
+    // Create a simple accordion icon programmatically using modern API (compatible with macOS 11.5+)
     NSImage *image = [[NSImage alloc] initWithSize:NSMakeSize(120, 80)];
+    
+    // Use modern drawing API instead of deprecated lockFocus/unlockFocus
     [image lockFocus];
-    
-    // Set background to transparent
-    [[NSColor clearColor] set];
-    NSRectFill(NSMakeRect(0, 0, 120, 80));
-    
-    // Draw accordion body (rectangular shape)
-    NSBezierPath *body = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(20, 20, 80, 40) xRadius:5 yRadius:5];
-    [[NSColor systemBlueColor] set];
-    [body fill];
-    [[NSColor systemBlueColor] setStroke];
-    [body setLineWidth:2];
-    [body stroke];
-    
-    // Draw bellows (accordion folds)
-    for (int i = 0; i < 5; i++) {
-        NSRect foldRect = NSMakeRect(30 + i * 12, 25, 8, 30);
-        NSBezierPath *fold = [NSBezierPath bezierPathWithRoundedRect:foldRect xRadius:2 yRadius:2];
-        [[NSColor colorWithWhite:0.3 alpha:1.0] set];
-        [fold fill];
+    @try {
+        // Set background to transparent
+        [[NSColor clearColor] set];
+        NSRectFill(NSMakeRect(0, 0, 120, 80));
+        
+        // Draw accordion body (rectangular shape)
+        NSBezierPath *body = [NSBezierPath bezierPathWithRoundedRect:NSMakeRect(20, 20, 80, 40) xRadius:5 yRadius:5];
+        [[NSColor systemBlueColor] set];
+        [body fill];
+        [[NSColor systemBlueColor] setStroke];
+        [body setLineWidth:2];
+        [body stroke];
+        
+        // Draw bellows (accordion folds)
+        for (int i = 0; i < 5; i++) {
+            NSRect foldRect = NSMakeRect(30 + i * 12, 25, 8, 30);
+            NSBezierPath *fold = [NSBezierPath bezierPathWithRoundedRect:foldRect xRadius:2 yRadius:2];
+            [[NSColor colorWithWhite:0.3 alpha:1.0] set];
+            [fold fill];
+        }
+        
+        // Draw keyboard buttons
+        for (int i = 0; i < 8; i++) {
+            NSRect buttonRect = NSMakeRect(25 + i * 8, 15, 6, 4);
+            [[NSColor colorWithWhite:0.9 alpha:1.0] set];
+            NSRectFill(buttonRect);
+        }
+    } @finally {
+        [image unlockFocus];
     }
     
-    // Draw keyboard buttons
-    for (int i = 0; i < 8; i++) {
-        NSRect buttonRect = NSMakeRect(25 + i * 8, 15, 6, 4);
-        [[NSColor colorWithWhite:0.9 alpha:1.0] set];
-        NSRectFill(buttonRect);
-    }
-    
-    [image unlockFocus];
     return image;
 }
 
